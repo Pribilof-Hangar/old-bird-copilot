@@ -56,7 +56,7 @@ auto = automated tests, sim = simulated or off-screen check, real = done on a re
 |---|---|---|
 | Connects, reconnects after the sim restarts, survives a sim crash ("pipe broken" 2026-10-10) | flight (earlier versions) | ✅ |
 | Callouts, DC-6 mode, descent planner, landing check on real flights | flight (1.3.x) | ✅ |
-| A full flight with the installed 1.4.1 | flight | ⬜ |
+| A flight with the installed 1.4.2 (DC-6A circuit: take-off calls, flaps, wind, sink rate, stable check, landing check "flaps full, three green", "ref", countdown, 200 fpm touchdown, "forty knots"); replay matches the live calls | flight | ✅ 2026-10-17 |
 | Steam version of MSFS 2024 | | ⬜ not available for testing |
 
 ## Known limitations

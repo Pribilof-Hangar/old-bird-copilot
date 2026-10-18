@@ -1,0 +1,133 @@
+OLD BIRD COPILOT  -  version 1.4.2
+Spoken landing callouts for Microsoft Flight Simulator 2024,
+made for classic aircraft that don't have any (like the PMDG DC-6).
+Works with any aircraft.
+
+MADE TO FLY WITH THE DC-6's FLIGHT ENGINEER (AFE)
+The AFE runs the engines, flaps, gear and checklists. Old Bird Copilot is the
+rest of the crew: the first officer calling speeds, heights and warnings,
+checking you're stable and grading your landing. It works without the AFE
+too, and in other aircraft.
+
+
+WHAT YOU NEED
+- Windows 11
+- Microsoft Flight Simulator 2024 (tested with the Microsoft Store version;
+  the Steam version uses the same connection but hasn't been tested yet)
+- Nothing else. No SPAD.next, FSUIPC, Axis and Ohs, MobiFlight or Python.
+  Everything it needs is included, voice too. It works with or without the
+  PMDG DC-6, and nothing is added to the simulator or its Community folder.
+
+
+INSTALLING
+1. Double-click OldBirdCopilot-Setup-<version>.exe.
+2. Windows may show "Windows protected your PC". That's because this free
+   app isn't signed with a paid certificate. If you downloaded it from the
+   official Old Bird Copilot page, click "More info", then "Run anyway".
+3. Follow the setup. It installs for your Windows user only, so it doesn't
+   ask for administrator rights. Tick "Create a desktop shortcut" if you
+   want one.
+4. Start it from the Start menu: "Old Bird Copilot".
+
+Prefer no installer? The portable zip works too: right-click it, choose
+"Extract All..." into e.g. Documents, and run OldBirdCopilot.exe from there.
+The portable copy keeps its settings in its own folder.
+
+
+USING IT
+- Start it whenever you like, before or after the sim. It connects by itself.
+  The dot at the top turns green: "Connected to MSFS".
+- Before take-off, fill in "Takeoff" (optional): V1, VR, V2. You'll hear
+  "vee one", "rotate" and "positive rate". In the DC-6, the "Aircraft" switch at
+  the top moves from UNIVERSAL to DC-6 by itself, and the app suggests these
+  from your live weight - click Use. Click either side to choose yourself.
+- Before each approach, fill in "Landing" (all optional):
+    Vref         your landing speed. Enables "plus ten" / "minus five" calls on final,
+                 and "ref" once you're back on speed.
+    Minimums     in feet above the runway (the number in brackets on the chart).
+    Max landing  a touchdown limit in fpm, e.g. 200 for a soft-landing mission.
+                 Leave it empty if there isn't one.
+- On approach you'll hear the heights (2500, 1000, 500, 100, 50, 40, 30,
+  20, 10), speed deviations, flap settings and warnings like "sink rate".
+- Passing 1000 ft (or as you start down on final, on a low circuit): the wind
+  ("wind two seven zero at fifteen, crosswind ten from the left"). Passing 500 ft: "five hundred, stable" - or "unstable" and
+  what's off (speed, sink rate, gear, flaps). In a strong crosswind (25 kt+)
+  your copilot adds a remark like "these are some crosswinds!"
+- Type your destination's airport code (e.g. PASN) in "Destination". The
+  Descent panel then shows the distance, when to start down ("in 12 nm"),
+  where you should be right now ("7,400 ft"), how far off you are ("2,200
+  high") and the descent rate that still gets you there. Your copilot says
+  "request descent" 2 minutes before the top of descent (time to ask ATC),
+  "top of descent" at the right point, and "high on profile" if you're well
+  above the path.
+  The plan in DC-6 mode: 1,000 fpm at cruise power down to a level-off 3,000 ft
+  above the field about 30 nm out, then slow down level for the approach.
+  You'll hear "five hundred to level off" on the way down.
+  Other planes: 1,000 fpm, to be 1,500 ft above the field 5 nm out (change it
+  in Settings > Landing).
+- "Calculator..." (under Destination) answers "I'm at 15,000 ft, when do I
+  start down?". It uses your live altitude and groundspeed (or numbers you
+  type), and a slider for the descent rate (1,000 fpm to start with; slide it
+  for a gentler or faster descent). The slider also sets when "top of descent"
+  is said.
+- Flying something that already calls out "100, 50, 40..." by itself (most
+  modern airliners)? Untick "Height callouts" in the main window. Everything
+  else keeps working. Tick it again for the old birds.
+- Under the readouts you can see your live weight and fuel - handy for finding
+  the right Vref for your load (e.g. on a NeoFly freight job).
+- In the PMDG DC-6 it looks the Vref up for you: "Suggested Vref" appears
+  in the Landing panel (from PMDG's own landing speed table) - click Use.
+  With DC-6 mode on, speed calls start once landing flaps (40 or full) are set.
+- DC-6 landing check: passing 300 ft on final, your copilot says "flaps full,
+  three green" - or "check flaps" / "check gear" if something isn't set yet.
+- After you land, the Landings tab shows your touchdown rate.
+- Test voice and Demo approach let you hear it without flying.
+- Callouts ON/OFF mutes it. Settings... changes voice, heights and more.
+- The voice is "Joe", a natural-sounding voice built into the app (no internet
+  needed). Prefer the old Windows voice? Settings... > Voice > Windows default.
+
+
+YOUR SETTINGS AND RECORDINGS
+They're kept in your Windows user folder. To find them: About > "Open that
+folder" (or type %APPDATA%\Old Bird Copilot in File Explorer's address bar).
+  config.toml   your settings
+  flights       recordings of your recent flights (the newest 20 are kept)
+  sounds        optional custom .wav callouts
+(The portable zip keeps these next to OldBirdCopilot.exe instead.)
+
+
+UPDATING
+Run the new OldBirdCopilot-Setup. It replaces the old version and keeps
+your settings and recordings. If the app is open, setup asks you to close it.
+
+
+UNINSTALLING
+Windows Settings > Apps > Installed apps > Old Bird Copilot > Uninstall.
+It asks whether to also remove your settings and flight recordings - the
+answer is "No" unless you choose otherwise, so a reinstall picks them up again.
+
+
+IF SOMETHING'S WRONG
+- Stuck on "Waiting for MSFS": load into a flight. The sim has to be past the
+  main loading screen.
+- No sound: click "Test voice" and check your Windows sound output.
+- Robotic voice instead of Joe: look in the Activity tab - it says why.
+  Running setup again usually fixes it. For the portable copy, moving its
+  folder to e.g. C:\Old Bird Copilot fixes it.
+- Your antivirus quarantines OldBirdCopilot.exe: small homemade apps
+  sometimes get flagged by mistake. Restore it and mark the folder as safe.
+- Portable zip: settings don't save? Don't run it from inside the zip or
+  from Program Files - extract it to Documents first.
+- It says it "hit an error and closed": send the file
+  landing-callouts-error.log from your settings folder (see above).
+- Anything else odd during a flight: press "Flag moment" right then, and
+  tell me roughly when it happened.
+
+
+Old Bird Copilot is freeware, for Microsoft Flight Simulator 2024 only, and for
+entertainment only. It is not intended for real-world aviation, navigation,
+training or any safety-critical use. It is an independent project, not
+affiliated with, endorsed by, sponsored by or supported by Microsoft, Asobo
+Studio or PMDG; their product names are used only to describe compatibility.
+It only reads information from the simulator, never changes your aircraft,
+and sends nothing over the internet.

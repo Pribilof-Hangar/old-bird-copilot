@@ -1,0 +1,24 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Build output
+build/
+dist/
+release/
+*.spec
+
+# Local data (settings and flight recordings belong to whoever runs it)
+config.toml
+config.toml.damaged-*
+flights/
+landing-callouts-error.log
+voice-samples/
+window-preview*.png
+
+# Not part of the repo
+PLAN.md
+# Joe's voice (piper.exe, runtime DLLs, ~60 MB model): ships inside the installer and zip, see docs/DEVELOPING.md
+voice/

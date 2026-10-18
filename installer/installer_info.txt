@@ -1,0 +1,16 @@
+Old Bird Copilot - spoken copilot callouts for Microsoft Flight Simulator 2024.
+
+Freeware. For entertainment only - not for real-world aviation, navigation, training
+or any safety-critical use. An independent project, not affiliated with, endorsed by,
+sponsored by or supported by Microsoft, Asobo Studio or PMDG.
+
+What this installs:
+- The app, for your Windows user only (no administrator rights needed).
+- A Start menu entry (and a desktop shortcut if you tick it).
+
+Nothing is added to the simulator or its Community folder, and nothing else needs to
+be installed. The app only reads information from the simulator; it never changes
+your aircraft or sends anything over the internet.
+
+Your settings and flight recordings are kept in your user folder
+(%APPDATA%\Old Bird Copilot). Updates keep them; uninstalling asks first.

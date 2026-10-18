@@ -42,6 +42,7 @@ auto = automated tests, sim = simulated or off-screen check, real = done on a re
 | First launch from the Start menu: window, Joe starts from the install folder, settings created in %APPDATA%\Old Bird Copilot, no error log | real | ✅ |
 | Clean shutdown: app and Joe processes stop, no temp folders left | real | ✅ |
 | Update 1.4.0 → 1.4.1 over the top: one Settings > Apps entry, settings (marker Vref 123) and recordings kept | real | ✅ |
+| Update 1.4.1 → 1.4.2 over the top: one entry, settings kept, LICENSE.txt and voice source links installed, starts with Joe | real | ✅ |
 | Setup run while the app is open detects it ("Please close all instances…") and changes nothing | real | ✅ (unattended run: refused with exit code 1) |
 | Uninstall (silent) removes program, shortcuts and Settings > Apps entry; keeps settings and recordings | real | ✅ |
 | Reinstall after that picks the kept settings up again | real | ✅ |

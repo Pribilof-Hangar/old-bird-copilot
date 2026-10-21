@@ -24,7 +24,7 @@ The PMDG DC-6 comes with an **Artificial Flight Engineer (AFE)** that runs the e
 
 **Descent**
 - Type your destination's airport code (about 44,000 airports, seaplane bases included). The **Descent** panel shows the distance, when to start down, where you should be right now, and how far off the path you are.
-- Joe says "request descent" 2 minutes before the top of descent (time to ask ATC), then "top of descent", and "high on profile" if you're well above the path.
+- Michael says "request descent" 2 minutes before the top of descent (time to ask ATC), then "top of descent", and "high on profile" if you're well above the path.
 - In the DC-6 it flies the classic profile: 1,000 fpm at cruise power down to a level-off 3,000 ft above the field about 30 nm out, with "five hundred to level off".
 - A **descent calculator** answers "I'm at 15,000 ft, when do I start down?", with a slider for your descent rate.
 
@@ -38,7 +38,7 @@ The PMDG DC-6 comes with an **Artificial Flight Engineer (AFE)** that runs the e
 - After touchdown: your landing rate, e.g. "one three two, within target" for a soft-landing mission. The Landings list keeps a log of every touchdown. In the DC-6, "forty knots" reminds you to come out of reverse.
 
 **And**
-- **Joe**, a natural-sounding voice built in. It works offline; the Windows voices are there if you prefer them.
+- **Michael**, a natural-sounding voice built in (Kokoro's am_michael). It works offline, and the Windows voices are there if you prefer them.
 - Reads the sim only. It never changes your aircraft, needs no internet, and sends nothing anywhere.
 - Records each flight so a problem can be traced afterwards. Press **Flag moment** when something sounds wrong.
 
@@ -63,7 +63,7 @@ Prefer no installer? A **portable zip** is on the Releases page too. Extract it 
    - **Takeoff:** V1, VR, V2. In the DC-6, click **Use** on the suggestion.
    - **Descent:** your destination's airport code.
    - **Landing:** Vref, minimums (feet above the runway), and a max landing rate if your mission has one.
-3. Fly. **Callouts ON/OFF** mutes Joe, **Settings…** changes the voice, which heights are called, warnings and more, and **About** shows where your settings and logs are kept.
+3. Fly. **Callouts ON/OFF** mutes Michael, **Settings…** changes the voice, which heights are called, warnings and more, and **About** shows where your settings and logs are kept.
 
 The **Aircraft** switch at the top picks **DC-6** by itself when the PMDG DC-6 is loaded, and **Universal** for anything else. Flying something that calls out heights by itself (most modern airliners)? Untick **Height callouts**.
 
@@ -73,7 +73,7 @@ The full user guide is [docs/Read Me First.txt](docs/Read%20Me%20First.txt).
 
 - **Stuck on "Waiting for MSFS"**: load into a flight. The sim has to be past its main loading screen.
 - **No sound**: click **Test voice** and check your Windows sound output.
-- **A robotic voice instead of Joe**: the Activity tab says why. Running setup again usually fixes it.
+- **A robotic voice instead of Michael**: the Activity tab says why. Running setup again usually fixes it.
 - **Something sounded wrong in flight**: press **Flag moment**, and include the flight recording from your settings folder (About > Open that folder) when you report it on the [Issues](../../issues) page.
 
 ## Tested with
@@ -87,7 +87,7 @@ See [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) for exactly what was 
 
 ## Credits
 
-- Voice "Joe" made with [Piper](https://github.com/rhasspy/piper), [eSpeak NG](https://github.com/espeak-ng/espeak-ng) and [ONNX Runtime](https://onnxruntime.ai/). The full notices are in `voice/THIRD-PARTY-NOTICES.txt`.
+- Voice "Michael": the [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) am_michael voice (Apache-2.0), run with [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx), [ONNX Runtime](https://onnxruntime.ai/), [phonemizer](https://github.com/bootphon/phonemizer) and [eSpeak NG](https://github.com/espeak-ng/espeak-ng). The full notices are in `voice/THIRD-PARTY-NOTICES.txt`.
 - Airport data from [OurAirports](https://ourairports.com/data/) (public domain).
 - DC-6 speeds from PMDG's DC-6 operating manual tables.
 

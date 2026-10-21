@@ -19,6 +19,7 @@ $env:TCL_LIBRARY = Join-Path $pyBase "tcl\tcl8.6"
 $env:TK_LIBRARY = Join-Path $pyBase "tcl\tk8.6"
 & .\.venv\Scripts\pyinstaller.exe --noconfirm --clean --onefile --windowed --name OldBirdCopilot `
     --icon assets\icon.ico --collect-all SimConnect --hidden-import win32com.client `
+    --collect-data kokoro_onnx --collect-submodules phonemizer --hidden-import espeakng_loader `
     --add-data "landing_callouts/data;landing_callouts/data" --paths . landing_callouts\__main__.py --log-level WARN
 if ($LASTEXITCODE -ne 0) { throw "PyInstaller failed" }
 
@@ -48,6 +49,9 @@ Copy-Item "docs\Read Me First.txt" $stage
 Copy-Item LICENSE (Join-Path $stage "LICENSE.txt")
 # A config.toml next to the exe makes it a portable copy: settings and recordings stay in its own folder.
 & $python -c "from landing_callouts import config; import sys; config.save(config.Config(), sys.argv[1])" (Join-Path $stage "config.toml")
+Write-Host "== Check: the packaged exe can speak with Michael (silently)"
+$p = Start-Process (Join-Path $stage "OldBirdCopilot.exe") -ArgumentList "--voice-check" -PassThru -Wait
+if ($p.ExitCode -ne 0) { throw "Voice check failed (exit $($p.ExitCode))" }
 $zip = "release\OldBirdCopilot-$version-portable.zip"
 if (Test-Path $zip) { Remove-Item $zip }
 Compress-Archive -Path $stage -DestinationPath $zip

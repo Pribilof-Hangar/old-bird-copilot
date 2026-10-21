@@ -1,4 +1,4 @@
-OLD BIRD COPILOT  -  version 1.4.2
+OLD BIRD COPILOT  -  version 1.5.0
 Spoken landing callouts for Microsoft Flight Simulator 2024,
 made for classic aircraft that don't have any (like the PMDG DC-6).
 Works with any aircraft.
@@ -83,8 +83,8 @@ USING IT
 - After you land, the Landings tab shows your touchdown rate.
 - Test voice and Demo approach let you hear it without flying.
 - Callouts ON/OFF mutes it. Settings... changes voice, heights and more.
-- The voice is "Joe", a natural-sounding voice built into the app (no internet
-  needed). Prefer the old Windows voice? Settings... > Voice > Windows default.
+- The voice is "Michael", a natural-sounding voice built into the app (no
+  internet needed). Prefer a Windows voice? Settings... > Voice > Windows default.
 
 
 YOUR SETTINGS AND RECORDINGS
@@ -111,7 +111,7 @@ IF SOMETHING'S WRONG
 - Stuck on "Waiting for MSFS": load into a flight. The sim has to be past the
   main loading screen.
 - No sound: click "Test voice" and check your Windows sound output.
-- Robotic voice instead of Joe: look in the Activity tab - it says why.
+- Robotic voice instead of Michael: look in the Activity tab - it says why.
   Running setup again usually fixes it. For the portable copy, moving its
   folder to e.g. C:\Old Bird Copilot fixes it.
 - Your antivirus quarantines OldBirdCopilot.exe: small homemade apps

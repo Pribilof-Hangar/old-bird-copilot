@@ -920,7 +920,8 @@ ABOUT_TEXT = (
     "Asobo Studio or PMDG. Their product names are used only to describe compatibility.\n\n"
     "Free software under the GNU AGPL-3.0: you may use, change and share it (LICENSE.txt next to the app). "
     "The source code is on the Old Bird Copilot GitHub page.\n\n"
-    "Credits: the voice \"Joe\" is made with Piper, eSpeak NG and ONNX Runtime. Airport data from OurAirports "
+    "Credits: the voice \"Michael\" is Kokoro (am_michael), with eSpeak NG and ONNX Runtime. Airport data from "
+    "OurAirports "
     "(public domain). Details and licences are in the voice folder's THIRD-PARTY-NOTICES.txt."
 )
 
@@ -1035,15 +1036,15 @@ class SettingsDialog:
 
     def _build_voice(self, nb, cfg: Config):
         f = self._tab(nb, "Voice")
-        from .speech import JOE_LABEL, WINDOWS_DEFAULT, joe_available, list_voices, wants_joe
+        from .speech import MICHAEL_LABEL, WINDOWS_DEFAULT, list_voices, michael_available, wants_michael
         try:
             voices = list_voices()
         except Exception:  # noqa: BLE001 - no SAPI available
             voices = []
-        joe = joe_available()
-        choices = ([JOE_LABEL] if joe else []) + ["Windows default"] + voices
-        if joe and wants_joe(cfg.voice):
-            current = JOE_LABEL
+        built_in = michael_available()
+        choices = ([MICHAEL_LABEL] if built_in else []) + ["Windows default"] + voices
+        if built_in and wants_michael(cfg.voice):
+            current = MICHAEL_LABEL
         elif cfg.voice and cfg.voice != WINDOWS_DEFAULT:
             current = next((v for v in voices if cfg.voice.lower() in v.lower()), "Windows default")
         else:
@@ -1294,9 +1295,9 @@ class SettingsDialog:
                 data[key] = [int(x) for x in var.get().replace(",", " ").split()]
             except ValueError:
                 raise config_mod.ConfigError(f"Deviation speeds must be whole numbers, like {example}") from None
-        from .speech import JOE_LABEL, WINDOWS_DEFAULT
+        from .speech import MICHAEL_LABEL, WINDOWS_DEFAULT
         voice = self.voice_var.get()
-        data["voice"] = {JOE_LABEL: "", "Windows default": WINDOWS_DEFAULT}.get(voice, voice)
+        data["voice"] = {MICHAEL_LABEL: "", "Windows default": WINDOWS_DEFAULT}.get(voice, voice)
         data["rate"] = self.rate_var.get()
         data["volume"] = self.volume_var.get()
         data["throttle_simvar"] = self.throttle_var.get().strip()

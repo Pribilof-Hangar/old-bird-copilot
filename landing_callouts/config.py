@@ -378,7 +378,7 @@ _COMMENTS = {
     "landing_target_fpm": "\n# Touchdown. Default max touchdown rate in fpm (0 = off; set per flight in the main window),\n"
                           "# and whether to say the result (\"one eight two, within target\")",
     "announce_touchdown": "# Say the touchdown rate even without a target",
-    "voice": "\n# Voice. \"\" = Joe, the built-in natural voice; \"windows\" = the Windows default voice; or part of an\n"
+    "voice": "\n# Voice. \"\" = Michael, the built-in natural voice; \"windows\" = the Windows default voice; or part of an\n"
              "# installed Windows voice name, e.g. \"Zira\". Rate -10..10, volume 0..100",
     "sounds_dir": "# Optional <key>.wav overrides, e.g. 50.wav, retard.wav",
     "record_flights": "\n# Record each sim session to the flights folder (newest 20 kept), for finding bugs",

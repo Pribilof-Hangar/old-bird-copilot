@@ -12,7 +12,7 @@ Nothing is installed into the simulator or its Community folder.
 |---|---|
 | Callout logic (pure, no sim/audio) | `landing_callouts/engine.py`, `descent.py`, `vref.py` |
 | Sim reading (SimConnect) | `landing_callouts/sim.py` |
-| Voice: Joe (Piper, separate `piper.exe` process) with Windows SAPI fallback | `landing_callouts/speech.py`, `voice/` |
+| Voice: Michael (Kokoro am_michael via kokoro-onnx, in-process, 2 CPU threads, fixed calls pre-rendered) with Windows SAPI fallback | `landing_callouts/speech.py`, `voice/` |
 | Window | `landing_callouts/gui.py` |
 | Settings (`config.toml`) | `landing_callouts/config.py` |
 | Airport list (OurAirports, public domain) | `landing_callouts/data/airports.csv.gz`, rebuilt with `tools/make_airports.py` |
@@ -32,9 +32,14 @@ Nothing is installed into the simulator or its Community folder.
    .venv\Scripts\python -m pip install -e . pyinstaller
    ```
 3. Inno Setup 6: `winget install JRSoftware.InnoSetup`.
-4. The `voice/` folder is not pip-installable. It holds `piper/` (Piper 2023.11.14-2 Windows build, trimmed to
-   English espeak data, plus the MSVC runtime DLLs `msvcp140.dll`, `vcruntime140.dll` and `vcruntime140_1.dll`),
-   `en_US-joe-medium.onnx(.json)` and `THIRD-PARTY-NOTICES.txt`. Keep it with the source.
+4. The `voice/` folder is not in the repo (too big). Build it once:
+   - `voice/kokoro/kokoro-v1.0.fp16.onnx` (or the smaller `kokoro-v1.0.int8.onnx`) from
+     https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0
+   - `voice/kokoro/michael.bin`: only the am_michael entry of `voices-v1.0.bin` from the same release
+     (`np.savez(path, am_michael=np.load("voices-v1.0.bin")["am_michael"])`, then rename to michael.bin)
+   - `voice/espeak/`: `espeak-ng.dll` and `espeak-ng-data/` from the installed `espeakng_loader` package (delete every
+     `*_dict` except `en_dict`), plus `msvcp140.dll`, `vcruntime140.dll`, `vcruntime140_1.dll` from System32
+   - `voice/THIRD-PARTY-NOTICES.txt`
 
 ## Run and test
 
@@ -82,11 +87,12 @@ SmartScreen reputation still builds over time.
 | pywin32 | PSF | |
 | Python-SimConnect 0.4.26 | AGPL-3.0 | bundled into the exe; compatible with the app's own AGPL-3.0 |
 | SimConnect.dll | Microsoft (MSFS SDK) | the SDK permits redistribution |
-| Piper (piper.exe, piper_phonemize.dll) | MIT | separate process |
-| eSpeak NG (espeak-ng.dll, data) | GPL-3.0 | used by piper.exe, not by the app's own code |
-| ONNX Runtime | MIT | |
+| Kokoro-82M model + am_michael voice | Apache-2.0 | `voice/kokoro/` |
+| kokoro-onnx | MIT | in the exe |
+| ONNX Runtime | MIT | in the exe |
+| phonemizer | GPL-3.0 | in the exe; GPL-3.0 is compatible with the app's AGPL-3.0 |
+| eSpeak NG (espeak-ng.dll, data) | GPL-3.0 | `voice/espeak/`, loaded in-process (same compatibility) |
 | MSVC runtime DLLs | Microsoft redistributable | |
-| Voice "joe" | CC0 dataset, fine-tuned from "lessac" (non-commercial terms) | the app is free and not sold |
 | OurAirports data | public domain | |
 
 **Licence:** Old Bird Copilot is licensed under the **GNU AGPL-3.0** (`LICENSE`, decided 2026-10-17). That also

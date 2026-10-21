@@ -20,7 +20,7 @@ from .descent import DC6_RATE_FPM, DescentPlanner
 from .engine import Callout, CalloutEngine, Sample, Touchdown
 from .numbers import number_words
 from .recorder import FlightRecorder
-from .speech import PrintSpeaker, make_speaker, remove_stale_temp_dirs
+from .speech import PrintSpeaker, make_speaker
 
 RECONNECT_S = 5
 TICK_S = 0.1
@@ -78,8 +78,6 @@ class Controller:
     # ------------------------------------------------------------ lifecycle
 
     def start(self) -> None:
-        if self.use_sim:              # the real app (tests and demos leave TEMP alone)
-            remove_stale_temp_dirs()
         self.speaker = self._make_speaker(self.cfg)
         if self.use_sim:
             self._sim_thread = threading.Thread(target=self._sim_loop, name="sim", daemon=True)

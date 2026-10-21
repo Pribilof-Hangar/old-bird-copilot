@@ -99,10 +99,14 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--list-voices", action="store_true", help="print the installed Windows voices")
     p.add_argument("--print", dest="print_only", action="store_true", help="print callouts instead of speaking")
     p.add_argument("--no-sim", action="store_true", help=argparse.SUPPRESS)  # for testing without MSFS
+    p.add_argument("--voice-check", action="store_true", help=argparse.SUPPRESS)  # build check: Michael renders
     p.add_argument("--replay", metavar="FILE", help="run a flights/*.csv recording through the callout logic "
                                                      "and compare with what was said")
     p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = p.parse_args(argv)
+
+    if args.voice_check:
+        return voice_check()
 
     if args.list_voices:
         from landing_callouts.speech import list_voices
@@ -156,6 +160,21 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         ctl.shutdown()
     return 0
+
+
+def voice_check() -> int:
+    """Load the built-in Michael voice and render one phrase, silently. Exit code 0 = it works (build check)."""
+    from landing_callouts import speech
+    if not speech.michael_available():
+        print(f"Michael voice files missing in {speech.voice_dir()}", file=sys.stderr)
+        return 1
+    try:
+        wav = speech.KokoroVoice(2, 100).render("flaps full, three green")
+    except Exception:  # noqa: BLE001 - report whatever broke
+        traceback.print_exc()
+        return 1
+    print(f"Michael OK ({len(wav)} bytes)")
+    return 0 if wav.startswith(b"RIFF") else 1
 
 
 def replay(path: str, cfg: config_mod.Config, vref_set: bool, mins_set: bool) -> int:

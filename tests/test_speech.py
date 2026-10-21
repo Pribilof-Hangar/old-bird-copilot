@@ -22,17 +22,18 @@ def samples_of(wav_bytes):
 
 
 class TestVoiceChoice(unittest.TestCase):
-    def test_default_is_joe(self):
-        self.assertTrue(speech.wants_joe(""))
-        self.assertTrue(speech.wants_joe("Joe"))
+    def test_default_is_michael(self):
+        self.assertTrue(speech.wants_michael(""))
+        self.assertTrue(speech.wants_michael("Michael"))
+        self.assertTrue(speech.wants_michael("Joe"))          # older settings: the built-in voice was Joe
 
-    def test_windows_voices_are_not_joe(self):
-        self.assertFalse(speech.wants_joe(speech.WINDOWS_DEFAULT))
-        self.assertFalse(speech.wants_joe("Zira"))
+    def test_windows_voices_are_not_michael(self):
+        self.assertFalse(speech.wants_michael(speech.WINDOWS_DEFAULT))
+        self.assertFalse(speech.wants_michael("Zira"))
 
 
 class TestPlainPath(unittest.TestCase):
-    """piper.exe can't open paths like C:\\Users\\José\\... (2026-10-17): it gets Windows' short names."""
+    """eSpeak can't open paths like C:\\Users\\José\\... (2026-10-17): it gets Windows' short names."""
 
     def test_plain_paths_pass_through(self):
         self.assertEqual(speech.plain_path(r"C:\Old Bird Copilot\voice"), r"C:\Old Bird Copilot\voice")
@@ -63,28 +64,41 @@ class TestVolume(unittest.TestCase):
 
 
 
-class TestStaleTempDirs(unittest.TestCase):
-    def test_removes_only_empty_leftovers(self):
-        import os
-        import tempfile
-        from pathlib import Path
-        base = Path(tempfile.mkdtemp())
-        empty = base / "oldbird-voice-old1"
-        busy = base / "oldbird-voice-busy"
-        other = base / "something-else"
-        for d in (empty, busy, other):
-            d.mkdir()
-        (busy / "x.wav").write_bytes(b"")
-        old = tempfile.tempdir
-        tempfile.tempdir = str(base)
-        try:
-            speech.remove_stale_temp_dirs()
-        finally:
-            tempfile.tempdir = old
-        self.assertFalse(empty.exists())
-        self.assertTrue(busy.exists())
-        self.assertTrue(other.exists())
-        os.remove(busy / "x.wav")
+class TestFixedPhrases(unittest.TestCase):
+    def test_countdown_first_and_no_duplicates(self):
+        from landing_callouts.config import Config
+        phrases = speech.fixed_phrases(Config())
+        self.assertEqual(phrases[:5], ["ten", "twenty", "thirty", "forty", "fifty"])
+        self.assertEqual(len(phrases), len(set(phrases)))
+        for p in ("minimums", "flaps full, three green", "check flaps", "ref", "plus ten", "flaps fifty",
+                  "five hundred, stable", "forty knots", "top of descent", "vee one"):
+            self.assertIn(p, phrases)
+
+    def test_follows_the_style_and_custom_texts(self):
+        from landing_callouts.config import Config
+        phrases = speech.fixed_phrases(Config(callout_style="airbus", texts={"retard": "idle"}))
+        self.assertIn("minimum", phrases)
+        self.assertIn("idle", phrases)
+
+
+@unittest.skipUnless(speech.michael_available(), "the voice folder isn't here")
+class TestMichael(unittest.TestCase):
+    """Renders real speech with the Kokoro model in the voice folder (a few seconds)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.voice = speech.KokoroVoice(2, 100)
+
+    def test_renders_a_wav_and_caches_it(self):
+        wav = self.voice.render("fifty")
+        self.assertTrue(wav.startswith(b"RIFF"))
+        self.assertGreater(len(wav), 10_000)
+        self.assertTrue(self.voice.is_cached("fifty"))
+        self.assertIs(self.voice.render("fifty"), wav)
+
+    def test_one_offs_are_not_cached(self):
+        self.voice.render("one thousand, speed one zero eight", keep=False)
+        self.assertFalse(self.voice.is_cached("one thousand, speed one zero eight"))
 
 
 if __name__ == "__main__":

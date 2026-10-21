@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "msfs-landing-callouts"
-version = "1.4.2"
+version = "1.5.0"
 description = "Old Bird Copilot: spoken landing callouts for Microsoft Flight Simulator 2024, made for classic aircraft"
 readme = "README.md"
 license = { text = "AGPL-3.0-or-later" }
@@ -12,6 +12,7 @@ requires-python = ">=3.11"
 dependencies = [
     "SimConnect==0.4.26",
     "pywin32; sys_platform == 'win32'",
+    "kokoro-onnx==0.6.1",
 ]
 
 [project.scripts]
